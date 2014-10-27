@@ -2,7 +2,7 @@
 <% if params[:create] == "success" %>
   Account created successfully<br>
 <% end %><p>
-
+<% if session[:email] == nil %>
 <a href="/create">Create new Account</a><br>
 <br>
 <br>
@@ -12,4 +12,10 @@ Login
     Password: <input type="text" name="password"><br>
     <input type="submit" name="submit">
   </form>
+<% else %>
+You are logged in as <%= session[:email] %>
+<p>THIS IS THE SECRET PAGE</p>
+<br><br><a href="/logout">Log Out</a>
+<% end %>
+
 </div>

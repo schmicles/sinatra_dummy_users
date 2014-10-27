@@ -1,3 +1,5 @@
+enable :sessions
+
 get '/' do
   # Look in app/views/index.erb
   erb :index
@@ -18,10 +20,17 @@ post '/' do
     new_user = User.where(email: params[:email]).first
     if new_user.authenticate(params[:password])
       'You are logged in'
+      session[:email] = params[:email]
+      erb :index
     else
       'wrong password'
     end
   else
     'Invalid User'
   end
+end
+
+get '/logout' do
+  session[:email] = nil
+  redirect "/"
 end
